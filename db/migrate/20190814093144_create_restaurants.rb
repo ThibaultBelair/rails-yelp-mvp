@@ -13,3 +13,4 @@ class CreateRestaurants < ActiveRecord::Migration[5.2]
 end
 
 
+# rails generate controller restaurants  name address
