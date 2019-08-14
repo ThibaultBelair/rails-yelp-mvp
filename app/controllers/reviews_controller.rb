@@ -15,10 +15,12 @@ before_action :set_review, only: %i[show]
     # we need `restaurant_id` to associate review with corresponding restaurant
     @restaurant = Restaurant.find(params[:restaurant_id])
     @review.restaurant = @restaurant
-    @review.save
-    redirect_to restaurant_path(@restaurant)
+    if @review.save
+      redirect_to restaurant_path(@restaurant)
+    else
+      render :new
+    end
   end
-
 
  private
 
@@ -27,6 +29,6 @@ before_action :set_review, only: %i[show]
   end
 
   def review_params
-    params.require(:review).permit(:content)
+    params.require(:review).permit(:content, :rating)
   end
 end
